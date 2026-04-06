@@ -15,16 +15,25 @@ export async function fetchStrapi(endpoint: string) {
 }
 
 /**
- * Strapi v5 blocks (Rich Text) extraction helper
+ * Strapi v5 blocks (Rich Text) or Markdown extraction helper
  */
-export function getStrapiText(blocks: any[] | null | undefined): string {
-  if (!blocks || !Array.isArray(blocks)) return "";
-  return blocks
-    .map((block: any) => {
-      if (block.children && Array.isArray(block.children)) {
-        return block.children.map((child: any) => child.text).join("");
-      }
-      return "";
-    })
-    .join("\n");
+export function getStrapiText(data: any): string {
+  if (!data) return "";
+  
+  // Handle Markdown/String (richtext)
+  if (typeof data === 'string') return data;
+  
+  // Handle Blocks (Array)
+  if (Array.isArray(data)) {
+    return data
+      .map((block: any) => {
+        if (block.children && Array.isArray(block.children)) {
+          return block.children.map((child: any) => child.text).join("");
+        }
+        return "";
+      })
+      .join("\n");
+  }
+  
+  return "";
 }

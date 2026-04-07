@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from "react";
-import { getStrapiText } from "@/lib/strapi";
+import { getStrapiText, getStrapiImageUrl } from "@/lib/formatters";
 import DetailsModal from "@/components/DetailsModal";
 
 export default function SolutionsClient({ initialSolutions }: { initialSolutions: any[] }) {
@@ -21,7 +21,7 @@ export default function SolutionsClient({ initialSolutions }: { initialSolutions
             <div 
               key={item.id} 
               className="card glass animate-fade-in" 
-              style={{ animationDelay: `${idx * 0.1}s` }}
+              style={{ animationDelay: `${idx * 0.1}s`, cursor: 'pointer' }}
               onClick={() => openModal(item)}
             >
               <div className="badge" style={{ 
@@ -60,6 +60,7 @@ export default function SolutionsClient({ initialSolutions }: { initialSolutions
         date={selectedSolution?.publishedAt}
         description={getStrapiText(selectedSolution?.description)}
         price={selectedSolution?.price}
+        imageUrl={getStrapiImageUrl(selectedSolution?.media)}
       />
     </>
   );

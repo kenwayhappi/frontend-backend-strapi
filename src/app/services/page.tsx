@@ -1,4 +1,4 @@
-import { fetchStrapi, getStrapiText } from "@/lib/strapi";
+import { fetchStrapi } from "@/lib/strapi";
 import ServicesClient from "./ServicesClient";
 
 export default async function Services() {

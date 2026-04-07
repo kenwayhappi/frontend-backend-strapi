@@ -41,13 +41,14 @@ const Navbar = () => {
           className="mobile-menu-btn" 
           onClick={() => setIsOpen(!isOpen)} 
           aria-label="Toggle menu"
-          style={{ position: 'relative', zIndex: 2005 }}
+          style={{ position: 'relative', zIndex: 3000, cursor: 'pointer', padding: '10px', flexShrink: 0, touchAction: 'manipulation' }}
         >
           {isOpen ? '✕' : '☰'}
         </button>
 
         <ul className={`nav-links ${isOpen ? 'active' : ''}`}>
           <li><Link href="/" onClick={() => setIsOpen(false)}>Accueil</Link></li>
+          <li><Link href="/about" onClick={() => setIsOpen(false)}>À propos</Link></li>
           <li><Link href="/services" onClick={() => setIsOpen(false)}>Services</Link></li>
           <li><Link href="/solutions" onClick={() => setIsOpen(false)}>Solutions</Link></li>
           <li><Link href="/jobs" onClick={() => setIsOpen(false)}>Recrutement</Link></li>

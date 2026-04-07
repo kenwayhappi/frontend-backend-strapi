@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from "react";
-import { getStrapiText } from "@/lib/strapi";
+import { getStrapiText, getStrapiImageUrl } from "@/lib/formatters";
 import DetailsModal from "@/components/DetailsModal";
 
 export default function JobsClient({ initialJobs }: { initialJobs: any[] }) {
@@ -21,7 +21,7 @@ export default function JobsClient({ initialJobs }: { initialJobs: any[] }) {
             <div 
               key={idx} 
               className="card glass animate-fade-in" 
-              style={{ animationDelay: `${idx * 0.1}s` }}
+              style={{ animationDelay: `${idx * 0.1}s`, cursor: 'pointer' }}
               onClick={() => openModal(item)}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '20px' }}>
@@ -37,7 +37,7 @@ export default function JobsClient({ initialJobs }: { initialJobs: any[] }) {
                   {item.type}
                 </span>
                 <span style={{ fontSize: '12px', opacity: 0.5 }}>
-                  {new Date(item.publishedAt).toLocaleDateString()}
+                  {item.publishedAt ? String(item.publishedAt).substring(0, 10) : ''}
                 </span>
               </div>
               <h3>{item.title}</h3>
@@ -71,6 +71,7 @@ export default function JobsClient({ initialJobs }: { initialJobs: any[] }) {
         title={selectedJob?.title || ""}
         date={selectedJob?.publishedAt}
         description={`Lieu: ${selectedJob?.location || 'Douala'}\nType: ${selectedJob?.type || 'Stage'}\n\n${getStrapiText(selectedJob?.description)}`}
+        imageUrl={getStrapiImageUrl(selectedJob?.media)}
       />
     </>
   );

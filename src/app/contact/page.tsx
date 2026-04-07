@@ -1,4 +1,5 @@
 import { fetchStrapi } from "@/lib/strapi";
+import ContactForm from "@/components/ContactForm";
 
 export default async function Contact() {
   const strapiData = await fetchStrapi('contact');
@@ -42,12 +43,7 @@ export default async function Contact() {
           </div>
           <div className="card glass animate-fade-in">
             <h3 style={{ marginBottom: '20px' }}>Envoyez-nous un message</h3>
-            <form style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              <input type="text" placeholder="Votre nom" style={{ padding: '12px', borderRadius: '8px', border: '1px solid var(--border)', background: 'transparent', color: 'var(--foreground)' }} />
-              <input type="email" placeholder="Votre email" style={{ padding: '12px', borderRadius: '8px', border: '1px solid var(--border)', background: 'transparent', color: 'var(--foreground)' }} />
-              <textarea placeholder="Votre message" rows={5} style={{ padding: '12px', borderRadius: '8px', border: '1px solid var(--border)', background: 'transparent', color: 'var(--foreground)' }}></textarea>
-              <button type="submit" className="btn btn-primary" style={{ padding: '15px' }}>Envoyer le message</button>
-            </form>
+            <ContactForm />
           </div>
         </div>
       </div>

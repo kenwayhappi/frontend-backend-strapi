@@ -30,8 +30,8 @@ export default async function Home() {
 
           {/* Text Section Right */}
           <div className="hero-content">
-            <h1 style={{ fontSize: '72px', marginBottom: '32px', lineHeight: '1.1', fontWeight: 800 }}>{heroTitle}</h1>
-            <p style={{ fontSize: '22px', marginBottom: '56px', opacity: 0.8, maxWidth: '650px', lineHeight: '1.6' }}>{heroDesc}</p>
+            <h1 style={{ fontSize: 'clamp(32px, 8vw, 72px)', marginBottom: '32px', lineHeight: '1.2', fontWeight: 800, wordWrap: 'break-word' }}>{heroTitle}</h1>
+            <p style={{ fontSize: 'clamp(16px, 4vw, 22px)', marginBottom: '56px', opacity: 0.8, maxWidth: '650px', lineHeight: '1.6' }}>{heroDesc}</p>
             <div className="hero-actions" style={{ display: 'flex', gap: '24px' }}>
               <Link href="/solutions" className="btn btn-primary" style={{ padding: '18px 40px' }}>
                 Explorer Nos Solutions

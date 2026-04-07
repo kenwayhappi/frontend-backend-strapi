@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect } from 'react';
+import Image from 'next/image';
 
 interface ModalProps {
   isOpen: boolean;
@@ -11,9 +12,12 @@ interface ModalProps {
   children?: React.ReactNode;
   icon?: string;
   date?: string;
+  imageUrl?: string;
 }
 
-const DetailsModal: React.FC<ModalProps> = ({ isOpen, onClose, title, price, description, children, date }) => {
+const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337';
+
+const DetailsModal: React.FC<ModalProps> = ({ isOpen, onClose, title, price, description, children, date, imageUrl }) => {
   // Prevent scrolling when modal is open
   useEffect(() => {
     if (isOpen) {
@@ -28,6 +32,13 @@ const DetailsModal: React.FC<ModalProps> = ({ isOpen, onClose, title, price, des
 
   if (!isOpen) return null;
 
+  // Build full URL if imageUrl is a relative path (from Strapi)
+  const fullImageUrl = imageUrl
+    ? imageUrl.startsWith('http')
+      ? imageUrl
+      : `${STRAPI_URL}${imageUrl}`
+    : null;
+
   return (
     <div className="modal-overlay animate-fade-in" onClick={onClose}>
       <div 
@@ -36,6 +47,30 @@ const DetailsModal: React.FC<ModalProps> = ({ isOpen, onClose, title, price, des
         style={{ animation: 'fadeIn 0.4s ease forwards' }}
       >
         <button className="modal-close" onClick={onClose} aria-label="Fermer">✕</button>
+
+        {/* Image du media Strapi */}
+        {fullImageUrl && (
+          <div style={{
+            width: '100%',
+            borderRadius: '12px',
+            overflow: 'hidden',
+            marginBottom: '28px',
+            maxHeight: '280px',
+            position: 'relative',
+          }}>
+            <img
+              src={fullImageUrl}
+              alt={title}
+              style={{
+                width: '100%',
+                height: '280px',
+                objectFit: 'cover',
+                display: 'block',
+                borderRadius: '12px',
+              }}
+            />
+          </div>
+        )}
         
         <div className="modal-header" style={{ marginBottom: '32px' }}>
           {date && (
